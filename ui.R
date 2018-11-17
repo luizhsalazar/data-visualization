@@ -14,8 +14,9 @@ ui <- dashboardPage(
   dashboardHeader(title = "Análise PROUNI"),
   dashboardSidebar(
     sidebarMenu(
-      menuItem("Dashboard as dsa as", tabName = "dashboard", icon = icon("dashboard")),
-      menuItem("Widgets", tabName = "widgets", icon = icon("th"))
+      menuItem("Dashboard", tabName = "dashboard", icon = icon("dashboard")),
+      menuItem("Gráfico 1", tabName = "grafico1", icon = icon("th")),
+      menuItem("Gráfico 2", tabName = "grafico2", icon = icon("th"))
     )
   ),
   dashboardBody(
@@ -34,8 +35,11 @@ ui <- dashboardPage(
               )
       ),
       
-      # Second tab content
-      tabItem(tabName = "widgets",
+      tabItem(tabName = "grafico1",
+              h2("Widgets tab content")
+      ),
+      
+      tabItem(tabName = "grafico2",
               h2("Widgets tab content")
       )
     ),
