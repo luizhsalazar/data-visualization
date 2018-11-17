@@ -1,15 +1,13 @@
-### Quantidade de bolsas por faixa etária 
+### Quantidade de bolsas por faixa et?ria 
 ### Quantidade de bolsas agrupadas pela faixa e por ano, no Brasil inteiro.
 
-### Carrega pacotes necessários
+### Carrega pacotes necess?rios
 library(ggplot2)
 library(dplyr)
 library(lubridate)
 detach("package:plyr", unload=TRUE) 
 
-dados <- read.csv("C:/Users/rdals/Downloads/todososdados01.csv", sep=";")
-
-
+dados <- read.csv("todososdados01.csv", sep=";")
 
 todososdados01$FAIXA_ETARIA <- vapply(todososdados01$IDADE, funcaoFaixaEtaria, 1)
 
@@ -22,7 +20,7 @@ tabela <- todososdados01 %>%
 View(tabela)
 
 
-### Function que volta as classes de faixa etária
+### Function que volta as classes de faixa et?ria
 funcaoFaixaEtaria <- function (temp_idade){
   if(temp_idade >= 17 & temp_idade <= 20) return(1)
   
