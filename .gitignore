@@ -38,4 +38,4 @@ rsconnect/
 
 todososdados01.csv
 
-.rds
+*.rds
