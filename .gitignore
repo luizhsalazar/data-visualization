@@ -37,3 +37,5 @@ vignettes/*.pdf
 rsconnect/
 
 todososdados01.csv
+
+.rds

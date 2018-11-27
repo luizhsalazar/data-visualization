@@ -1,9 +1,9 @@
-Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
-
 ## importando pacotes
 library(ggplot2)
 library(dplyr)
 library(lubridate)
+
+Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
 
 detach("package:plyr", unload=TRUE) 
 
@@ -24,7 +24,7 @@ my_theme <- function(base_size = 14, base_family = "Arial") {
           complete = TRUE)
 } 
 
-todososdados01 <- read.csv("todososdados01.csv", sep=";")
+todososdados01 <- readRDS("dados.rds")
 
 tab_tipo_bolsa <- todososdados01 %>%
   group_by_(.dots=c("ANO_CONCESSAO_BOLSA","TIPO_BOLSA")) %>% 
@@ -66,7 +66,7 @@ plot_modalidade_bolsa <- ggplot() +
   scale_y_continuous(limits = c (0,210000))+
   my_theme()
 #theme_gray(base_size = 16) 
-plot_modalidade_bolsa
+##plot_modalidade_bolsa
 
 
 
