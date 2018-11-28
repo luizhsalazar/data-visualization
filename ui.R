@@ -5,14 +5,14 @@ library(ggExtra)
 library(ggthemes)
 library(ggplotify)
 library(treemapify)
+library(plyr)
 library(dplyr)
 library(scales)
-library(plyr)
 library(zoo)
 
 ui <- dashboardPage(
   skin = "green",
-  dashboardHeader(title = "Informações do PROUNI", titleWidth = 260),
+  dashboardHeader(title = "Informações PROUNI", titleWidth = 260),
   
   dashboardSidebar(
     width = 260,
@@ -56,8 +56,41 @@ ui <- dashboardPage(
       
       tabItem(
         tabName = "graficoEstado" ,
-        h2(class = "text-bold", "Quantidade de bolsistas por Estado")
-        # TODO
+        h2(class = "text-bold", "Quantidade de bolsistas por Estado"),
+        sidebarPanel(
+          selectInput('estado', 'Estado',  c("Santa Catarina" = "SC",
+                                             "Rio Grande do Sul" = "RS",
+                                             "Paraná" = "PR",
+                                             "São Paulo" = "SP",
+                                             "Rio de Janeiro" = "RJ",
+                                             "Minas Gerais" = "MG",
+                                             "Mato Grosso do Sul" = "MS",
+                                             "Mato Grosso" = "MT",
+                                             "Tocantins" = "TO",
+                                             "Bahia" = "BA",
+                                             "Sergipe" = "SE",
+                                             "Alagoas" = "AL",
+                                             "Pernambuco" = "PE",
+                                             "Maranhão" = "MA",
+                                             "Rio Grande do Norte" = "RN",
+                                             "Ceará" = "CE",
+                                             "Paraíba" = "PB",
+                                             "Pará" = "PA",
+                                             "Amapá" = "AP",
+                                             "Acre" = "AC",
+                                             "Rondônia" = "RO",
+                                             "Roraima" = "RR",
+                                             "Amazonas" = "AM",
+                                             "Distrito Federal" = "DF",
+                                             "Goiás" = "GO",
+                                             "Espírito Santo" = "ES"
+                                             )
+                      )
+        ),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plot_bolsistas_estado")
+          )
+        )
       ),
       
       tabItem(
