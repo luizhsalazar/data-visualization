@@ -18,9 +18,6 @@ prouni <- read.csv("todososdados01.csv", sep=";")
 
 server <- function(input, output) {
   
-  #plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R")
-  #output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
-  
   bolsistas_estados <- prouni %>%
     group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "SIGLA_UF_BENEFICIARIO_BOLSA")) %>% 
     dplyr::summarize(total = n()) %>%
