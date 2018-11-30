@@ -52,9 +52,13 @@ ui <- dashboardPage(
               h2(class="text-bold", "Análise de informações da base de dados do PROUNI"),
               br(),
               p("Dados referentes ao detalhamento quantitativo das bolsas concedidas por ano, segmentadas por região, unidade federativa e município, instituição de educação superior, nome do curso, modalidade de ensino (presencial ou a distância), turno e tipo de bolsa."),
-              br(),
               p("Foram extraidas informações do período entre 2005 a 2016. O intuíto dessa aplicação é visualizar as informações a nível de que se possa obter conhecimento das mesmas para tomada de decisão."),
-              p(class="text-muted", "Dados disponiveis em: http://dados.gov.br/dataset/mec-prouni")
+              br(),
+              fluidRow(
+                valueBox(value = "dados.gov", subtitle = "Informações oficiais disponibilizadas pelo MEC.", icon = icon("download"), color = "green"),
+                valueBox(value = "2005 a 2016",subtitle = "Período de captura das informações.",icon = icon("calendar"),color = "blue"),
+                valueBox(value = "2 m.", subtitle = "Aproximadamente 2 milhões de registros apurados.",icon = icon("area-chart"),color = "yellow")
+              )
       ),
       
       tabItem(
@@ -182,14 +186,10 @@ ui <- dashboardPage(
               p("Comparativo entre a quantidade de bolsas agrupadas por faixa etária ao longo dos anos. Para isso, as idades foram dividas em quatro classes. A primeira classe de 17 a 20 anos, depois temos as classes intermediárias das faixas de 21 a 30 anos e de 31 a 40 anos, e temos a considerada 'terceira idade', de 41 a 80 anos."),
               br(),
               fluidRow(
-                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria1", height = "250px")
-                ),
-                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria2", height = "250px")
-                ),
-                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria3", height = "250px")
-                ),
-                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria4", height = "250px")
-                )
+                box(solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria1", height = "250px")),
+                box(solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria2", height = "250px")),
+                box(solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria3", height = "250px")),
+                box(solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria4", height = "250px"))
               )
         ),
       
@@ -199,8 +199,13 @@ ui <- dashboardPage(
               p("Algumas informações sobre os beneficiários com idade acima dos 40 anos."),
               br(),
               fluidRow(
-                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotAcima401", height = "250px")
-                )
+                valueBox(value = "74 mil", subtitle = "pessoas com mais de 40 anos foram beneficiadas. Isso representa 3,72% do total", icon = icon("infinity"), color = "blue"),
+                valueBox(value = "Pedagogia",subtitle = "é o curso mais ingressado nessa faixa etária. Cerca de 14.500 bolsas foram disponibilizadas.",icon = icon("school"),color = "green"),
+                valueBox(value = "53%", subtitle = "de pessoas acima de 40 anos são do sexo feminino. Esse valor é semelhante ao percentual geral. ",icon = icon("female"),color = "red")
+              ),
+              fluidRow(
+                box(width=7, title = "Instituições com maior participação", "Universidade não sei o que 10%", br(), "Universidade top 20%"),
+                box(width=4, status = "warning", title="Pessoas com mais de 40 anos voltam às salas de aula", "Dados do Instituto Nacional de Estudos e Pesquisas Educacionais (INEP) de 2011 apontam que, no Brasil, quase 550 mil pessoas com mais de 40 anos estão cursando faculdade. E nos últimos quatro anos houve um aumento de 4.018 universitários a partir desta faixa etária.")
               )
       )
       

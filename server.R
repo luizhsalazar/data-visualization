@@ -51,7 +51,7 @@ server <- function(input, output) {
   plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R", encoding="utf-8")
   output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
   
-  ## Plots referente a faixa etária
+  ## FAIXA ETARIA
   plotFaixaEtaria1 <- source("plots/faixa_etaria/plot_faixa_etaria_1.R", encoding="utf-8")
   output$plotFaixaEtaria1 <- renderPlot(plotFaixaEtaria1)
   plotFaixaEtaria2 <- source("plots/faixa_etaria/plot_faixa_etaria_2.R", encoding="utf-8")
@@ -65,8 +65,6 @@ server <- function(input, output) {
   
   ##plotRegioes <- source("plots/plot_regioes.R")
   ##plotSexo <- source("plots/plot_sexo.R")
-  
-  ##output$plotFaixaEtaria <- renderPlot(plotFaixaEtaria)
   ##output$plotRegioes <- renderPlot(plotRegioes)
   ##output$plotSexo <- renderPlot(plotSexo)
 

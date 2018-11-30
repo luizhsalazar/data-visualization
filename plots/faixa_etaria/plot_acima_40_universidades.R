@@ -30,13 +30,16 @@ detach_package <- function(pkg, character.only = FALSE)
   }
 }
 
-
 ### EXTRAÇÃO DOS DADOS
 #######################################################################
 
 detach_package("plyr")
 
-dados <- readRDS("dados.rds")
+dados <- read.csv("c:\\Temp\\todososdados01.csv", sep=";", encoding = 'UTF-8')
+#dados <- readRDS("dados.rds")
+
+### PERC de PARTICIPACAO POR UNIVERSIDADE
+#######################################################################
 
 tabelaAlunosPorUniversidade <- dados %>% 
   group_by(NOME_IES_BOLSA) %>% 
@@ -56,6 +59,49 @@ tabelaAlunosPorUniversidadeAcima40 <- tabelaAlunosPorUniversidadeAcima40 %>%
 
 View(tabelaAlunosPorUniversidadeAcima40)
 
+### QUANTIDADE DE ALUNOS BENEFICIADOS
+#######################################################################
+
+quantidadePessoasBeneficiadas <- dados %>%
+  filter(IDADE > 40) %>%
+  summarise(QUANTIDADE_TOTAL = n())
+
+quantidadePessoasBeneficiadas
+
+### QUAL CURSO MAIS PROCURADO
+#######################################################################
+
+tabelaCursos <- dados %>% 
+  filter(IDADE > 40) %>%
+  group_by(NOME_CURSO_BOLSA_NOVO) %>% 
+  summarise(QUANTIDADE_TOTAL = n()) %>%
+  arrange(desc(QUANTIDADE_TOTAL))
+
+View(tabelaCursos)
+
+### PARTICIPACAO FEMININA
+#######################################################################
+
+View(dados)
+
+quantidadeTotalBeneficiados <- dados %>%
+  filter(IDADE > 40) %>%
+  summarise(QUANTIDADE_TOTAL = n())
+
+quantidadeTotalMulheresBeneficiados <- dados %>%
+  filter(IDADE > 40 , SEXO_BENEFICIARIO_BOLSA == 'Feminino') %>%
+  summarise(QUANTIDADE_TOTAL = n())
+
+quantidadeTotalBeneficiados
+quantidadeTotalMulheresBeneficiados
+
+
+quantidadeTotalBeneficiados <- dados %>%
+  summarise(QUANTIDADE_TOTAL = n())
+
+quantidadeTotalMulheresBeneficiados <- dados %>%
+  filter(SEXO_BENEFICIARIO_BOLSA == 'Feminino') %>%
+  summarise(QUANTIDADE_TOTAL = n())
 
 
 
