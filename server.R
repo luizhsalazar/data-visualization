@@ -51,14 +51,18 @@ server <- function(input, output) {
   plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R", encoding="utf-8")
   output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
   
-  plotFaixaEtaria1 <- source("plots/plot_faixa_etaria_1.R", encoding="utf-8")
+  ## Plots referente a faixa etária
+  plotFaixaEtaria1 <- source("plots/faixa_etaria/plot_faixa_etaria_1.R", encoding="utf-8")
   output$plotFaixaEtaria1 <- renderPlot(plotFaixaEtaria1)
-  plotFaixaEtaria2 <- source("plots/plot_faixa_etaria_2.R", encoding="utf-8")
+  plotFaixaEtaria2 <- source("plots/faixa_etaria/plot_faixa_etaria_2.R", encoding="utf-8")
   output$plotFaixaEtaria2 <- renderPlot(plotFaixaEtaria2)
-  plotFaixaEtaria3 <- source("plots/plot_faixa_etaria_3.R", encoding="utf-8")
+  plotFaixaEtaria3 <- source("plots/faixa_etaria/plot_faixa_etaria_3.R", encoding="utf-8")
   output$plotFaixaEtaria3 <- renderPlot(plotFaixaEtaria3)
-  plotFaixaEtaria4 <- source("plots/plot_faixa_etaria_4.R", encoding="utf-8")
+  plotFaixaEtaria4 <- source("plots/faixa_etaria/plot_faixa_etaria_4.R", encoding="utf-8")
   output$plotFaixaEtaria4 <- renderPlot(plotFaixaEtaria4)
+ 
+  
+  
   ##plotRegioes <- source("plots/plot_regioes.R")
   ##plotSexo <- source("plots/plot_sexo.R")
   

@@ -1,7 +1,8 @@
-### Quantidade de bolsas por faixa etária 
-### Quantidade de bolsas agrupadas pela faixa e por ano, no Brasil inteiro.
+### Informações sobre quantidade de bolsistas por faixa etária 3 (31 a 40 anos)
+###
+### Plot que gera gráfico de barras com a quantidade de bolsistas da faixa etária 1 (31 a 40 anos)
+### ao longo dos anos (2005 a 2016)
 
-### Remover essas librarys ao incluir no principal
 library(ggplot2)
 library(dplyr)
 library(lubridate)

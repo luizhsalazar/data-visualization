@@ -1,7 +1,8 @@
-### Quantidade de bolsas por faixa etária 
-### Quantidade de bolsas agrupadas pela faixa e por ano, no Brasil inteiro.
+### Informações sobre quantidade de bolsistas por faixa etária 4 (acima dos 40 anos)
+###
+### Plot que gera gráfico de barras com a quantidade de bolsistas da faixa etária 1 (acima dos 40 anos)
+### ao longo dos anos (2005 a 2016)
 
-### Remover essas librarys ao incluir no principal
 library(ggplot2)
 library(dplyr)
 library(lubridate)
@@ -62,8 +63,8 @@ tabelaQuantidadePorAnoEFaixa$QUANTIDADE_TOTAL <- vapply(tabelaQuantidadePorAnoEF
 tabelaQuantidadePorAnoEFaixa$PERCENTUAL_REPRES <- tabelaQuantidadePorAnoEFaixa$QUANTIDADE / tabelaQuantidadePorAnoEFaixa$QUANTIDADE_TOTAL * 100
 
 ## Tabelas por faixa etária
-tabelaFaixaEtaria1 <- tabelaQuantidadePorAnoEFaixa %>%
-  filter(FAIXA_ETARIA == 1)
+tabelaFaixaEtaria4 <- tabelaQuantidadePorAnoEFaixa %>%
+  filter(FAIXA_ETARIA == 4)
 
 ### GRÁFICOS
 #######################################################################
@@ -82,16 +83,16 @@ my_theme <- function (base_size = 10, base_family = "Arial") {
           complete = TRUE)
 }
 
-grafico <- ggplot(tabelaFaixaEtaria1, aes(x = ANO_CONCESSAO_BOLSA, y = PERCENTUAL_REPRES)) +
+grafico <- ggplot(tabelaFaixaEtaria4, aes(x = ANO_CONCESSAO_BOLSA, y = PERCENTUAL_REPRES)) +
     geom_bar(stat = "identity", width = 0.7, fill = "#006400") +
-    labs(title = "% de participação da faixa etária (17 a 20 anos)",
+    labs(title = "% de participação da faixa etária (acima dos 40 anos)",
          x = "Ano",
          y = "% de participação") +
     scale_x_continuous(breaks = seq(2005, 2016, 1)) +
     scale_y_continuous(limits=c(0, 70), breaks = seq(0, 70, 10)) +
     my_theme() +
     theme(axis.text.x = element_text(angle = 65, vjust = 0.6))
-
+  
 grafico
 
 

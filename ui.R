@@ -37,7 +37,8 @@ ui <- dashboardPage(
         ),
         
         menuItem("Faixa etária", icon = icon("user"), startExpanted = TRUE,
-          menuSubItem("Bolsas por faixa etária", tabName = "graficoFaixaEtaria")
+          menuSubItem("Bolsas por faixa etária", tabName = "graficoFaixaEtaria"),
+          menuSubItem("Beneficiários acima dos 40", tabName = "graficoAcima40")
         )
       )
   ),
@@ -139,7 +140,9 @@ ui <- dashboardPage(
       
       tabItem(
         tabName = "graficoTipoBolsas" ,
-        h2(class = "text-bold", "Análise da proporção de bolsas por tipo de bolsas (Parcial e integral)")
+        h2(class = "text-bold", "Análise da proporção de bolsas por tipo de bolsas (Parcial e integral)"),
+        br(),
+        p("Texto a fazer")
         # TODO
       ),
       
@@ -158,7 +161,18 @@ ui <- dashboardPage(
                 box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria4", height = "250px")
                 )
               )
-        )
+        ),
+      
+      tabItem(tabName = "graficoAcima40",
+              h2(class="text-bold", "Informações de beneficiários acima dos 40 anos"),
+              br(),
+              p("Algumas informações sobre os beneficiários com idade acima dos 40 anos."),
+              br(),
+              fluidRow(
+                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotAcima401", height = "250px")
+                )
+              )
+      )
       
     )
   )
