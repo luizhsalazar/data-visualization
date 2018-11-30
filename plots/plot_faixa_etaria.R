@@ -19,7 +19,7 @@ library(dplyr)
 library(lubridate)
 detach("package:plyr", unload=TRUE) 
 
-dados <- read.csv("c:\\temp\\todososdados01.csv", sep=";")
+dados <- read.csv("c:\\Temp\\todososdados01.csv", sep=";")
 dados$FAIXA_ETARIA <- vapply(dados$IDADE, funcaoFaixaEtaria, 1)
 
 ### FUNCTIONS
@@ -38,6 +38,8 @@ funcaoFaixaEtaria <- function (temp_idade){
   return (0)
 }
 
+
+### EXTRAÇÃO DOS DADOS
 #######################################################################
 
 ## Tabela com ANO x Quantidade total de alunos
@@ -68,8 +70,31 @@ tabelaFaixaEtaria2 <- tabelaQuantidadePorAnoEFaixa %>%
 tabelaFaixaEtaria2 <- tabelaQuantidadePorAnoEFaixa %>%
   filter(FAIXA_ETARIA == 4)
 
+### GRÁFICOS
+#######################################################################
 
+seta <- grid::arrow(length = grid::unit(0.2, "cm"), type = "open")
+my_theme <- function (base_size = 14, base_family = "Arial") {
+  theme_bw(base_size = base_size, base_family = base_family) %+replace%
+    theme(axis.ticks = element_blank(),
+          axis.line = element_line(arrow = seta),
+          legend.background = element_blank(),
+          legend.key = element_blank(),
+          panel.background = element_blank(),
+          panel.border = element_blank(),
+          strip.background = element_blank(),
+          plot.background = element_blank(),
+          complete = TRUE)
+}
 
-
+grafico <- ggplot(tabelaQuantidadePorAnoEFaixa, aes(x = ANO_CONCESSAO_BOLSA, y = PERCENTUAL_REPRES)) +
+    geom_bar(stat = "identity", width = 0.7, fill = "#006400") +
+    labs(title = "% de participação por faixa etária ao longo dos anos",
+         x = "Ano",
+         y = "% de participação") +
+    scale_x_continuous(breaks = seq(2005, 2016, 1)) +
+    my_theme() +
+    theme(axis.text.x = element_text(angle = 65, vjust = 0.6))
+grafico
 
 

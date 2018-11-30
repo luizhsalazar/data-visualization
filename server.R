@@ -48,7 +48,8 @@ server <- function(input, output) {
   plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R")
   output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
   
-  ##plotFaixaEtaria <- source("plots/plot_faixa_etaria.R")
+  plotFaixaEtaria <- source("plots/plot_faixa_etaria.R")
+  output$plotFaixaEtaria <- renderPlot(plotFaixaEtaria)
   ##plotRegioes <- source("plots/plot_regioes.R")
   ##plotSexo <- source("plots/plot_sexo.R")
   

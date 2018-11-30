@@ -146,16 +146,21 @@ ui <- dashboardPage(
       ),
       
       tabItem(tabName = "graficoFaixaEtaria",
-              h2(class="text-bold","Quantidade de bolsas por faixa etaria"),
+              h2(class="text-bold","Quantidade de bolsas por faixa etária"),
               br(),
-              p("Comparativo entre a quantidade de bolsas agrupadas por faixa etaria ao longo dos anos. Para isso, as idades foram dividas em quatro classes."),
-              p("- Idade 1 (17 a 20 anos)"),
-              p("- Idade 2 (21 a 30 anos)"),
-              p("- Idade 3 (31 a 40 anos)"),
-              p("- Idade 4 (41 a 80 anos)")
-              ##fluidRow(
-               ## box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria")
-               ## )
+              p("Comparativo entre a quantidade de bolsas agrupadas por faixa etária ao longo dos anos. Para isso, as idades foram dividas em quatro classes. A primeira classe de 17 a 20 anos, representa os estudantes que recém concluiram o ensino médio, depois temos as classes intermediárias das faixas de 21 a 30 anos e de 31 a 40 anos, e temos a considerada 'terceira idade', de 41 a 80 anos."),
+              br(),
+              sidebarPanel(
+                selectInput('FAIXA_ETARIA', 'Faixa etária',  c("17 a 20 anos" = "1",
+                                                   "21 a 30 anos" = "2",
+                                                   "31 a 40 anos" = "3",
+                                                   "41 a 80 anos" = "4")
+                          )
+              ),
+              fluidRow(
+                box( status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria")
+                )
+              )
         )
       
     )
