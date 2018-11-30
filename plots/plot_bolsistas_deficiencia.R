@@ -10,6 +10,8 @@ library(RColorBrewer)
 #prouni <- prouni[prouni$ANO_CONCESSAO_BOLSA != '', ]
 #print("CSV carregado ...")
 
+prouni <- readRDS("dados.rds")
+
 bolsistas_deficiencia <- prouni %>%
   group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "BENEFICIARIO_DEFICIENTE_FISICO")) %>% 
   dplyr::summarize(total = n()) %>%

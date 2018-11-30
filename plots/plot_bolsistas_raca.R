@@ -31,6 +31,8 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
 #prouni <- prouni[prouni$ANO_CONCESSAO_BOLSA != '', ]
 #print("CSV carregado ...")
 
+prouni <- readRDS("dados.rds")
+
 bolsistas_raca <- prouni %>%
   group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "RACA_BENEFICIARIO_BOLSA")) %>% 
   dplyr::summarize(total = n()) %>%
