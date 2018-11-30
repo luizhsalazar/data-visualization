@@ -46,13 +46,19 @@ server <- function(input, output) {
     return(plot_bolsistas_estado)
   })
 
-  saveRDS(todososdados01, "dados.rds")
+  saveRDS(prouni, "dados.rds")
 
-  plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R")
+  plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R", encoding="utf-8")
   output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
   
-  plotFaixaEtaria <- source("plots/plot_faixa_etaria.R")
-  output$plotFaixaEtaria <- renderPlot(plotFaixaEtaria)
+  plotFaixaEtaria1 <- source("plots/plot_faixa_etaria_1.R", encoding="utf-8")
+  output$plotFaixaEtaria1 <- renderPlot(plotFaixaEtaria1)
+  plotFaixaEtaria2 <- source("plots/plot_faixa_etaria_2.R", encoding="utf-8")
+  output$plotFaixaEtaria2 <- renderPlot(plotFaixaEtaria2)
+  plotFaixaEtaria3 <- source("plots/plot_faixa_etaria_3.R", encoding="utf-8")
+  output$plotFaixaEtaria3 <- renderPlot(plotFaixaEtaria3)
+  plotFaixaEtaria4 <- source("plots/plot_faixa_etaria_4.R", encoding="utf-8")
+  output$plotFaixaEtaria4 <- renderPlot(plotFaixaEtaria4)
   ##plotRegioes <- source("plots/plot_regioes.R")
   ##plotSexo <- source("plots/plot_sexo.R")
   

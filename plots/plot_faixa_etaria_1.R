@@ -2,25 +2,11 @@
 ### Quantidade de bolsas agrupadas pela faixa e por ano, no Brasil inteiro.
 
 ### Remover essas librarys ao incluir no principal
-library(shinydashboard)
-library(ggplot2)
-library(ggcorrplot)
-library(ggExtra)
-library(ggthemes)
-library(ggplotify)
-library(treemapify)
-library(plyr)
-library(dplyr)
-library(scales)
-library(zoo)
-
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-detach("package:plyr", unload=TRUE) 
 
-dados <- read.csv("c:\\Temp\\todososdados01.csv", sep=";")
-dados$FAIXA_ETARIA <- vapply(dados$IDADE, funcaoFaixaEtaria, 1)
+Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
 
 ### FUNCTIONS
 #######################################################################
@@ -38,9 +24,27 @@ funcaoFaixaEtaria <- function (temp_idade){
   return (0)
 }
 
+detach_package <- function(pkg, character.only = FALSE)
+{
+  if(!character.only)
+  {
+    pkg <- deparse(substitute(pkg))
+  }
+  search_item <- paste("package", pkg, sep = ":")
+  while(search_item %in% search())
+  {
+    detach(search_item, unload = TRUE, character.only = TRUE)
+  }
+}
+
 
 ### EXTRAÇÃO DOS DADOS
 #######################################################################
+
+detach_package("plyr")
+
+dados <- readRDS("dados.rds")
+dados$FAIXA_ETARIA <- vapply(dados$IDADE, funcaoFaixaEtaria, 1)
 
 ## Tabela com ANO x Quantidade total de alunos
 tabelaQuantidadeTotal <- dados %>%
@@ -61,20 +65,11 @@ tabelaQuantidadePorAnoEFaixa$PERCENTUAL_REPRES <- tabelaQuantidadePorAnoEFaixa$Q
 tabelaFaixaEtaria1 <- tabelaQuantidadePorAnoEFaixa %>%
   filter(FAIXA_ETARIA == 1)
 
-tabelaFaixaEtaria2 <- tabelaQuantidadePorAnoEFaixa %>%
-  filter(FAIXA_ETARIA == 2)
-
-tabelaFaixaEtaria2 <- tabelaQuantidadePorAnoEFaixa %>%
-  filter(FAIXA_ETARIA == 3)
-
-tabelaFaixaEtaria2 <- tabelaQuantidadePorAnoEFaixa %>%
-  filter(FAIXA_ETARIA == 4)
-
 ### GRÁFICOS
 #######################################################################
 
 seta <- grid::arrow(length = grid::unit(0.2, "cm"), type = "open")
-my_theme <- function (base_size = 14, base_family = "Arial") {
+my_theme <- function (base_size = 10, base_family = "Arial") {
   theme_bw(base_size = base_size, base_family = base_family) %+replace%
     theme(axis.ticks = element_blank(),
           axis.line = element_line(arrow = seta),
@@ -87,14 +82,16 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
           complete = TRUE)
 }
 
-grafico <- ggplot(tabelaQuantidadePorAnoEFaixa, aes(x = ANO_CONCESSAO_BOLSA, y = PERCENTUAL_REPRES)) +
+grafico <- ggplot(tabelaFaixaEtaria1, aes(x = ANO_CONCESSAO_BOLSA, y = PERCENTUAL_REPRES)) +
     geom_bar(stat = "identity", width = 0.7, fill = "#006400") +
-    labs(title = "% de participação por faixa etária ao longo dos anos",
+    labs(title = "% de participação da faixa etária (17 a 20 anos)",
          x = "Ano",
          y = "% de participação") +
     scale_x_continuous(breaks = seq(2005, 2016, 1)) +
+    scale_y_continuous(limits=c(0, 70), breaks = seq(0, 70, 10)) +
     my_theme() +
     theme(axis.text.x = element_text(angle = 65, vjust = 0.6))
+
 grafico
 
 

@@ -146,17 +146,16 @@ ui <- dashboardPage(
       tabItem(tabName = "graficoFaixaEtaria",
               h2(class="text-bold","Quantidade de bolsas por faixa etária"),
               br(),
-              p("Comparativo entre a quantidade de bolsas agrupadas por faixa etária ao longo dos anos. Para isso, as idades foram dividas em quatro classes. A primeira classe de 17 a 20 anos, representa os estudantes que recém concluiram o ensino médio, depois temos as classes intermediárias das faixas de 21 a 30 anos e de 31 a 40 anos, e temos a considerada 'terceira idade', de 41 a 80 anos."),
+              p("Comparativo entre a quantidade de bolsas agrupadas por faixa etária ao longo dos anos. Para isso, as idades foram dividas em quatro classes. A primeira classe de 17 a 20 anos, depois temos as classes intermediárias das faixas de 21 a 30 anos e de 31 a 40 anos, e temos a considerada 'terceira idade', de 41 a 80 anos."),
               br(),
-              sidebarPanel(
-                selectInput('FAIXA_ETARIA', 'Faixa etária',  c("17 a 20 anos" = "1",
-                                                   "21 a 30 anos" = "2",
-                                                   "31 a 40 anos" = "3",
-                                                   "41 a 80 anos" = "4")
-                          )
-              ),
               fluidRow(
-                box( status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria")
+                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria1", height = "250px")
+                ),
+                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria2", height = "250px")
+                ),
+                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria3", height = "250px")
+                ),
+                box(status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotFaixaEtaria4", height = "250px")
                 )
               )
         )
