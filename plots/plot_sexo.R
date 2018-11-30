@@ -39,6 +39,8 @@ bolsistas_por_sexo <- prouni %>%
   summarize(total = n()) %>%
   as.data.frame()
 
+### Sexo, linha
+
 plot_sexo_por_ano <- ggplot() +
   geom_line(data = bolsistas_por_sexo,
             aes(x = ANO_CONCESSAO_BOLSA, y = total, color = SEXO_BENEFICIARIO_BOLSA)) +
@@ -52,3 +54,22 @@ plot_sexo_por_ano <- ggplot() +
   my_theme()
 
 plot_sexo_por_ano
+
+### Sexo, barras
+
+plot_sexo_por_ano_2 <- ggplot(prouni, aes(ANO_CONCESSAO_BOLSA)) +
+  geom_bar(aes(fill = SEXO_BENEFICIARIO_BOLSA), width = 0.5) +
+  labs(title = "Quantidade anual de bolsas",
+       subtitle = "Distribuição por sexo",
+       caption = "Fonte: http://dados.gov.br/dataset/mec-prouni") +
+  labs(x = "Ano de concessão", y = "Número de bolsistas", col = "Sexo")
+  my_theme() +
+  theme(axis.text.x = element_text(angle=65, vjust=0.6))
+
+plot_sexo_por_ano_2
+
+
+
+
+
+
