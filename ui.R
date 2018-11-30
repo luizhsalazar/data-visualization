@@ -204,7 +204,7 @@ ui <- dashboardPage(
                 valueBox(value = "53%", subtitle = "de pessoas acima de 40 anos são do sexo feminino. Esse valor é semelhante ao percentual geral. ",icon = icon("female"),color = "red")
               ),
               fluidRow(
-                box(width=7, title = "Instituições com maior participação", "Universidade não sei o que 10%", br(), "Universidade top 20%"),
+                box(width=7, title = "Instituições com maior participação", "Entre as instituições que cederam bolsas ao ProUni, destacamos a Faculdade Educacional da Lapa, na cidade de Lapa no Paraná, que no geral teve 13% dos beneficiados pessoas com mais de 40 anos (das 8686 bolsas, 1141 foram para essas pessoas). ", br(), br(), "Também tem destaque a Faculdade de São Paulo (São Paulo - SP),  Faculdade de tecnologia Internacional (Curitiba - PR) e o Centro Universitário Claretiano (Blumenau - SC) com 10% dos beneficiados."),
                 box(width=4, status = "warning", title="Pessoas com mais de 40 anos voltam às salas de aula", "Dados do Instituto Nacional de Estudos e Pesquisas Educacionais (INEP) de 2011 apontam que, no Brasil, quase 550 mil pessoas com mais de 40 anos estão cursando faculdade. E nos últimos quatro anos houve um aumento de 4.018 universitários a partir desta faixa etária.")
               )
       )
