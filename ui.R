@@ -9,6 +9,8 @@ library(plyr)
 library(dplyr)
 library(scales)
 library(zoo)
+library(bubbles)
+library(DT)
 
 ui <- dashboardPage(
   skin = "green",
@@ -116,14 +118,42 @@ ui <- dashboardPage(
       
       tabItem(
         tabName = "graficoRaca" ,
-        h2(class = "text-bold", "Análise de proporção de bolsistas por raça")
-        # TODO
+        h2(class = "text-bold", "Análise de proporção de bolsistas por raça"),
+         checkboxGroupInput("racas", label = "", 
+          choices = list( "Amarela" = "Amarela",
+                          "Branca" = "Branca",
+                          "Indígena" = "Indígena",
+                          "Não Informada" = "Não Informada",
+                          "Parda" = "Parda",
+                          "Preta" = "Preta"),
+          selected = c("Amarela", "Branca", "Indígena", "Não Informada", "Parda", "Preta"),
+          inline = TRUE),
+          fluidRow(
+            box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotRaca")
+            )
+          )
       ),
       
       tabItem(
         tabName = "graficoInclusaoSocial" ,
-        h2(class = "text-bold", "Instituições com maior inclusão de pessoas com deficiência")
-        # TODO
+        h2(class = "text-bold", "Portadores de deficiência"),
+        br(),
+        fluidRow(
+            box(title = "Histórico da quantidade de bolsistas portadores de deficiência", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotDeficienciaHistorico")
+          )
+        ),
+         fluidRow(
+          box(
+            width = 7, status = "primary", 
+            title = "Instituições que tiveram maior quantidade de bolsistas portadores de deficiência",
+            bubblesOutput("plotDeficienciaBubble", width = "100%", height = 800)
+          ),
+          box(
+            width = 5, status = "primary",
+            title = "Relação de bolsistas por Instituição",
+            DT::dataTableOutput("plotDeficienciaDatatable")
+          )
+        )
       ),
       
       tabItem(

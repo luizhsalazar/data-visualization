@@ -14,7 +14,7 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
           complete = TRUE)
 }
 
-prouni <- read.csv("todososdados01.csv", sep=";")
+prouni <- read.csv("todososdados01.csv", sep=";", encoding = 'UTF-8')
 
 server <- function(input, output) {
   
@@ -65,4 +65,36 @@ server <- function(input, output) {
   ##output$plotFaixaEtaria <- renderPlot(plotFaixaEtaria)
   ##output$plotRegioes <- renderPlot(plotRegioes)
   ##output$plotSexo <- renderPlot(plotSexo)
+
+  ### DEFICIÊNCIA ###
+  plotDeficiencia <- source("plots/plot_bolsistas_deficiencia.R")
+  output$plotDeficienciaHistorico <- plotDeficienciaHistorico
+  output$plotDeficienciaBubble <- plotDeficienciaBubble
+  output$plotDeficienciaDatatable <- plotDeficienciaDatatable
+  
+  ### RAÇA ###
+  bolsistas_raca <- prouni %>%
+  group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "RACA_BENEFICIARIO_BOLSA")) %>% 
+  dplyr::summarize(total = n()) %>%
+  as.data.frame()
+
+  bolsistas_raca_filter <- reactive({
+    bolsistas_raca <- filter(bolsistas_raca, RACA_BENEFICIARIO_BOLSA %in% input$racas)
+  })
+
+  output$plotRaca <- renderPlot({
+    filteredData <- bolsistas_raca_filter()
+    plot_bolsistas_raca <- ggplot() +
+      geom_line(data = filteredData,
+                aes(x = ANO_CONCESSAO_BOLSA, y = total, color = RACA_BENEFICIARIO_BOLSA)) +
+      geom_point(data = filteredData, aes(x = ANO_CONCESSAO_BOLSA, y = total), 
+                pch = 1, alpha = 0.8, size = 3) +
+      labs(x = "Ano", y = "Número de bolsistas", col = "Raça") +
+      scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
+      scale_y_continuous(limits = c(0, 125000)) + 
+      theme_gray(base_size = 16) +
+    my_theme()
+    return(plot_bolsistas_raca)
+  })
+
 }
