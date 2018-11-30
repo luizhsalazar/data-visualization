@@ -24,7 +24,10 @@ server <- function(input, output) {
     as.data.frame()
   
   bolsistas_estados_filter <- reactive({
-    bolsistas_estados <- filter(bolsistas_estados, SIGLA_UF_BENEFICIARIO_BOLSA == input$estado)
+    if (is.null(input$estado))
+      bolsistas_estados <- filter(bolsistas_estados, SIGLA_UF_BENEFICIARIO_BOLSA == 'SC')
+    else
+      bolsistas_estados <- filter(bolsistas_estados, SIGLA_UF_BENEFICIARIO_BOLSA %in% input$estado)
   })
   
   output$plot_bolsistas_estado <- renderPlot({
