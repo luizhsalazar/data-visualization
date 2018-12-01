@@ -66,14 +66,35 @@ server <- function(input, output) {
   
   plotRegioes <- source("plots/plot_regioes.R")
   plotSexo <- source("plots/plot_sexo.R")
-  plotCursos <- source("plots/plot_cursos.R")
   output$plotRegioes <- renderPlot(plotRegioes)
   output$plotSexo <- renderPlot(plotSexo)
   
+  ### CURSO ###
+
+  bolsistas_por_curso <- prouni %>%
+    group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>% 
+    summarize(total = n()) %>%
+    filter(NOME_CURSO_BOLSA_NOVO %in% 
+             c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos")) %>%
+    as.data.frame()
   
+  bolsistas_curso_filter <- reactive({
+    bolsistas_por_curso <- filter(bolsistas_por_curso, NOME_CURSO_BOLSA_NOVO %in% input$cursos)
+  })
   
-  
-  output$plotCursos <- renderPlot(plotCursos)
+  output$plotCursos <- renderPlot({
+    filteredData <- bolsistas_curso_filter()
+    plot_por_curso <- ggplot() +
+      geom_line(data = filteredData,
+                aes(x = ANO_CONCESSAO_BOLSA, y = total, color = NOME_CURSO_BOLSA_NOVO)) +
+      labs(x = "Ano", y = "Número de bolsistas", col = "Curso") +
+      scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
+      scale_y_continuous(limits = c(0, 30000)) + 
+      theme_gray(base_size = 16) +
+      my_theme()
+    
+    return(plot_por_curso)
+  })
 
   ### DEFICIÊNCIA ###
   plotDeficiencia <- source("plots/plot_bolsistas_deficiencia.R")
