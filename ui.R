@@ -228,7 +228,6 @@ ui <- dashboardPage(
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
         br(),
-        p("Texto a fazer"),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotCursos")
           )
@@ -239,7 +238,8 @@ ui <- dashboardPage(
         tabName = "graficoModalidadeEnsino" ,
         h2(class = "text-bold", "Evolução das bolsas oferecidas por modalidade de ensino"),
         br(),
-        p("Texto a fazer"),
+        p("Comparativo entre  quantidade de bolsas disponibilizadas ao longo do tempo, por modalidade de ensino do curso, presencial e à distância."),
+        br(),
         fluidRow(
             box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeDeBolsa")
           )
@@ -250,7 +250,8 @@ ui <- dashboardPage(
         tabName = "graficoTipoBolsas" ,
         h2(class = "text-bold", "Análise da proporção de bolsas por tipo de bolsas (Parcial e integral)"),
         br(),
-        p("Texto a fazer"),
+        p("Comparativo entre a quantidade de bolsas disponibilizadas ao longo dos anos, por tipo de bolsas. Podendo ser bolsa integral, parcial (50%) e complementar (25%)."),
+        br(),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotTipoDeBolsa"))
           )
@@ -271,8 +272,6 @@ ui <- dashboardPage(
       
       tabItem(tabName = "graficoAcima40",
               h2(class="text-bold", "Informações de beneficiários acima dos 40 anos"),
-              br(),
-              p("Algumas informações sobre os beneficiários com idade acima dos 40 anos."),
               br(),
               fluidRow(
                 valueBox(value = "74 mil", subtitle = "pessoas com mais de 40 anos foram beneficiadas. Isso representa 3,72% do total", icon = icon("infinity"), color = "blue"),

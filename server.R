@@ -104,8 +104,8 @@ server <- function(input, output) {
   output$plotFaixaEtaria4 <- renderPlot(plotFaixaEtaria4)
  
   
-  plotRegioes <- source("plots/plot_regioes.R")
-  plotSexo <- source("plots/plot_sexo.R")
+  plotRegioes <- source("plots/plot_regioes.R", encoding="utf-8")
+  plotSexo <- source("plots/plot_sexo.R", encoding="utf-8")
   output$plotRegioes <- renderPlot(plotRegioes)
   output$plotSexo <- renderPlot(plotSexo)
   
