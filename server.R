@@ -121,7 +121,7 @@ server <- function(input, output) {
     group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>% 
     summarize(total = n()) %>%
     filter(NOME_CURSO_BOLSA_NOVO %in% 
-             c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenhraia Elétrica")) %>%
+             c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenharia Elétrica")) %>%
     as.data.frame()
   
   bolsistas_curso_filter <- reactive({
@@ -144,7 +144,7 @@ server <- function(input, output) {
 
   ### DEFICIÊNCIA ###
   plotDeficiencia <- source("plots/plot_bolsistas_deficiencia.R")
-  output$plotDeficienciaHistorico <- plotDeficienciaHistorico
+  output$plotDeficienciaHistoricoBarra <- plotDeficienciaHistoricoBarra
   output$plotDeficienciaBubble <- plotDeficienciaBubble
   output$plotDeficienciaDatatable <- plotDeficienciaDatatable
   
@@ -161,7 +161,7 @@ server <- function(input, output) {
   output$plotRaca <- renderPlot({
     filteredData <- bolsistas_raca_filter()
     plot_bolsistas_raca <- ggplot() +
-      geom_line(data = filteredData,
+      geom_line(data = filteredData, size = 1,
                 aes(x = ANO_CONCESSAO_BOLSA, y = total, color = RACA_BENEFICIARIO_BOLSA)) +
       geom_point(data = filteredData, aes(x = ANO_CONCESSAO_BOLSA, y = total), 
                 pch = 1, alpha = 0.8, size = 3) +
@@ -174,7 +174,7 @@ server <- function(input, output) {
   })
   
   bolsistas_por_curso_sexo <- prouni %>%
-    filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenhraia Elétrica")) %>%
+    filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenharia Elétrica")) %>%
     group_by_(.dots=c("SEXO_BENEFICIARIO_BOLSA", "ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>%
     summarize(total = n()) %>%
     as.data.frame()

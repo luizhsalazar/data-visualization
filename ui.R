@@ -184,7 +184,7 @@ ui <- dashboardPage(
                                            "Educação Física" = "Educação Física",
                                            "Psicologia" = "Psicologia",
                                            "Recursos Humanos" = "Recursos Humanos",
-                                           "Engenhraia Elétrica" = "Engenhraia Elétrica"
+                                           "Engenharia Elétrica" = "Engenharia Elétrica"
                            ),
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
@@ -218,9 +218,13 @@ ui <- dashboardPage(
         h2(class = "text-bold", "Portadores de deficiência"),
         br(),
         fluidRow(
-            box(title = "Histórico da quantidade de bolsistas portadores de deficiência", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotDeficienciaHistorico")
+            box(title = "Histórico da quantidade de bolsistas portadores de deficiência", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotDeficienciaHistoricoBarra")
           )
         ),
+        # fluidRow(
+        #     box(title = "Histórico da quantidade de bolsistas portadores de deficiência", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotDeficienciaHistorico")
+        #   )
+        # ),
          fluidRow(
           box(
             width = 7, status = "primary", 
@@ -250,7 +254,7 @@ ui <- dashboardPage(
                                            "Educação Física" = "Educação Física",
                                            "Psicologia" = "Psicologia",
                                            "Recursos Humanos" = "Recursos Humanos",
-                                           "Engenhraia Elétrica" = "Engenhraia Elétrica"
+                                           "Engenharia Elétrica" = "Engenharia Elétrica"
                                            ),
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
