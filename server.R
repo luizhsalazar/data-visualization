@@ -104,7 +104,11 @@ server <- function(input, output) {
   output$plotFaixaEtaria3 <- renderPlot(plotFaixaEtaria3)
   plotFaixaEtaria4 <- source("plots/faixa_etaria/plot_faixa_etaria_4.R", encoding="utf-8")
   output$plotFaixaEtaria4 <- renderPlot(plotFaixaEtaria4)
- 
+  plotModalidadeBolsaPizza <- source("plots/plot_modalidade_bolsa_pizza.R", encoding="utf-8")
+  output$plotModalidadeBolsaPizza <- renderPlot(plotModalidadeBolsaPizza)
+  plotModalidadeTipoPizza <- source("plots/plot_tipo_bolsa_pizza.R", encoding="utf-8")
+  output$plotModalidadeTipoPizza <- renderPlot(plotModalidadeTipoPizza)
+  
   
   plotRegioes <- source("plots/plot_regioes.R", encoding="utf-8")
   plotSexo <- source("plots/plot_sexo.R", encoding="utf-8")

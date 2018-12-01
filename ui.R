@@ -23,7 +23,7 @@ ui <- dashboardPage(
         
         menuItem("Região", icon = icon("map-marker"), startExpanted = TRUE,
                  menuSubItem("Bolsistas por estado", tabName = "graficoEstado"),
-                 #menuSubItem("Bolsistas por região", tabName = "graficoRegiao"),
+                 menuSubItem("Bolsistas por região", tabName = "graficoRegiao"),
                  menuSubItem("Bolsas X Nível de instrução", tabName = "graficoNivelInstrucao")
         ),
         
@@ -59,7 +59,7 @@ ui <- dashboardPage(
               fluidRow(
                 valueBox(value = "dados.gov", subtitle = "Informações oficiais disponibilizadas pelo MEC.", icon = icon("download"), color = "green"),
                 valueBox(value = "2005 a 2016",subtitle = "Período de captura das informações.",icon = icon("calendar"),color = "blue"),
-                valueBox(value = "2 m.", subtitle = "Aproximadamente 2 milhões de registros apurados.",icon = icon("area-chart"),color = "yellow")
+                valueBox(value = "2 m.", subtitle = "Aproximadamente 2 milhões de registros.",icon = icon("area-chart"),color = "yellow")
               )
       ),
       
@@ -105,7 +105,8 @@ ui <- dashboardPage(
         tabName = "graficoRegiao" ,
         h2(class = "text-bold", "Quantidade de bolsistas por Região"),
         br(),
-        p("Texto a fazer"),
+        p("Comparativo entre quantidade de bolsistas por região."),
+        br(),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotRegioes")
           )
@@ -269,6 +270,10 @@ ui <- dashboardPage(
         fluidRow(
             box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeDeBolsa")
           )
+        ),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeBolsaPizza")
+          )
         )
       ),
       
@@ -280,7 +285,11 @@ ui <- dashboardPage(
         br(),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotTipoDeBolsa"))
+          ),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeTipoPizza")
           )
+        )
       ),
       
       tabItem(tabName = "graficoFaixaEtaria",
