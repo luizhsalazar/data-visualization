@@ -65,9 +65,7 @@ ui <- dashboardPage(
       tabItem(
         tabName = "graficoEstado",
         h2(class = "text-bold", "Quantidade de bolsistas por Estado"),
-        fluidRow(
-          valueBox(value = "São Paulo", subtitle = "é o estado com a maior quantidade de bolsistas do Brasil", icon = icon("area-chart"), color = "green", width = 12)
-        ),
+        
         selectInput('estado', 'Selecione o Estado',  c("Santa Catarina" = "SC",
                                            "Rio Grande do Sul" = "RS",
                                            "Paraná" = "PR",
@@ -116,7 +114,7 @@ ui <- dashboardPage(
       tabItem(
         tabName = "graficoNivelInstrucao" ,
         h2(class = "text-bold", "Evolução do nível de instrução dos brasileiros nos últimos anos"),
-        p("De maneira geral, observa-se que a porcentagem da população com ensino superior completo tem crescido no mesmo ritmo que há aumento de bolsas no PROUNI."),
+        p("Aqui há a evolução da quantidade de pessoas com Ensino médio completo e incompleto ao longo do tempo. De maneira geral, observa-se que a porcentagem da população com ensino superior completo tem crescido no mesmo ritmo que há aumento de bolsas no PROUNI."),
         
         selectInput('estado_instrucao', 'Selecione o Estado',  c("Santa Catarina" = "SC",
                                            "Rio Grande do Sul" = "RS",

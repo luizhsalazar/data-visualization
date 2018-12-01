@@ -16,6 +16,8 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
 
 prouni <-          read.csv("todososdados01.csv", sep=";", encoding = 'UTF-8')
 nivel_instrucao <- read.csv("nivelinstrucao.csv", sep=",", encoding = 'UTF-8')
+nivel_instrucao$Completo <- as.numeric(gsub(pattern = ",", replacement = ".", x = nivel_instrucao$Completo))
+nivel_instrucao$Incompleto <- as.numeric(gsub(pattern = ",", replacement = ".", x = nivel_instrucao$Incompleto))
 
 server <- function(input, output) {
   
