@@ -117,7 +117,7 @@ server <- function(input, output) {
     group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>% 
     summarize(total = n()) %>%
     filter(NOME_CURSO_BOLSA_NOVO %in% 
-             c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos")) %>%
+             c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenhraia Elétrica")) %>%
     as.data.frame()
   
   bolsistas_curso_filter <- reactive({
@@ -170,7 +170,7 @@ server <- function(input, output) {
   })
   
   bolsistas_por_curso_sexo <- prouni %>%
-    filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos")) %>%
+    filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos", "Engenhraia Elétrica")) %>%
     group_by_(.dots=c("SEXO_BENEFICIARIO_BOLSA", "ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>%
     summarize(total = n()) %>%
     as.data.frame()

@@ -182,7 +182,8 @@ ui <- dashboardPage(
                                            "Ciências Contábeis" = "Ciências Contábeis",
                                            "Educação Física" = "Educação Física",
                                            "Psicologia" = "Psicologia",
-                                           "Recursos Humanos" = "Recursos Humanos"
+                                           "Recursos Humanos" = "Recursos Humanos",
+                                           "Engenhraia Elétrica" = "Engenhraia Elétrica"
                            ),
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
@@ -247,7 +248,8 @@ ui <- dashboardPage(
                                            "Ciências Contábeis" = "Ciências Contábeis",
                                            "Educação Física" = "Educação Física",
                                            "Psicologia" = "Psicologia",
-                                           "Recursos Humanos" = "Recursos Humanos"
+                                           "Recursos Humanos" = "Recursos Humanos",
+                                           "Engenhraia Elétrica" = "Engenhraia Elétrica"
                                            ),
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
