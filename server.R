@@ -42,7 +42,7 @@ server <- function(input, output) {
                  pch = 1, alpha = 0.8, size = 3) +
       labs(x = "Ano", y = "Número de bolsistas", col = "Estado") +
       scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
-      scale_y_continuous(limits = c(0, 70000)) + 
+      scale_y_continuous(limits = c(0, max(datadata$total) + 1000)) + 
       theme_gray(base_size = 16) +
       my_theme()
     
@@ -135,7 +135,7 @@ server <- function(input, output) {
                 aes(x = ANO_CONCESSAO_BOLSA, y = total, color = NOME_CURSO_BOLSA_NOVO)) +
       labs(x = "Ano", y = "Número de bolsistas", col = "Curso") +
       scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
-      scale_y_continuous(limits = c(0, 30000)) + 
+      scale_y_continuous(limits = c(0, max(filteredData$total) + 1000)) + 
       theme_gray(base_size = 16) +
       my_theme()
     
@@ -167,7 +167,7 @@ server <- function(input, output) {
                 pch = 1, alpha = 0.8, size = 3) +
       labs(x = "Ano", y = "Número de bolsistas", col = "Raça") +
       scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
-      scale_y_continuous(limits = c(0, 125000)) + 
+      scale_y_continuous(limits = c(0, max(filteredData$total) + 1000)) + 
       theme_gray(base_size = 16) +
     my_theme()
     return(plot_bolsistas_raca)
@@ -190,7 +190,7 @@ server <- function(input, output) {
                 aes(x = ANO_CONCESSAO_BOLSA, y = total, color = SEXO_BENEFICIARIO_BOLSA)) +
       labs(title = "Administração", x = "Ano", y = "Número de bolsistas", col = "Sexo") +
       scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
-      scale_y_continuous(limits = c(0, 30000)) + 
+      scale_y_continuous(limits = c(0, max(filtered_data$total) + 1000)) + 
       theme_gray(base_size = 16) +
       my_theme()
     return(plot_por_curso_sexo)
