@@ -168,5 +168,28 @@ server <- function(input, output) {
     my_theme()
     return(plot_bolsistas_raca)
   })
+  
+  bolsistas_por_curso_sexo <- prouni %>%
+    filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos")) %>%
+    group_by_(.dots=c("SEXO_BENEFICIARIO_BOLSA", "ANO_CONCESSAO_BOLSA")) %>%
+    summarize(total = n()) %>%
+    as.data.frame()
+  
+  bolsistas_curso_sexo_filter <- reactive({
+    bolsistas_por_curso_sexo <- filter(bolsistas_por_curso_sexo, NOME_CURSO_BOLSA_NOVO %in% input$cursos_sexo)
+  })
+  
+  output$plot_curso_sexo <- renderPlot({
+    filteredData <- bolsistas_curso_sexo_filter()
+    plot_por_curso_sexo <- ggplot() +
+      geom_line(data = filtered_data,
+                aes(x = ANO_CONCESSAO_BOLSA, y = total, color = SEXO_BENEFICIARIO_BOLSA)) +
+      labs(title = "Administração", x = "Ano", y = "Número de bolsistas", col = "Sexo") +
+      scale_x_continuous(limits = c(2005, 2016), breaks = seq(2005, 2016, 1)) +
+      scale_y_continuous(limits = c(0, 30000)) + 
+      theme_gray(base_size = 16) +
+      my_theme()
+    return(plot_curso_sexo)
+  })
 
 }

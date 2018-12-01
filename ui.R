@@ -29,6 +29,7 @@ ui <- dashboardPage(
         
         menuItem("Diversidade", icon = icon("certificate"), startExpanted = TRUE,
                  menuSubItem("Bolsas por sexo", tabName = "graficoSexo"),
+                 menuSubItem("Bolsas por curso e sexo", tabName = "graficoCursoSexo"),
                  menuSubItem("Bolsas por raça", tabName = "graficoRaca"),
                  menuSubItem("Inclusão social", tabName = "graficoInclusaoSocial")
         ),
@@ -163,6 +164,31 @@ ui <- dashboardPage(
         h2(class = "text-bold", "Análise de proporção de bolsistas por sexo"),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotSexo")
+          )
+        )
+      ),
+      
+      tabItem(
+        tabName = "graficoCursoSexo" ,
+        h2(class = "text-bold", "Distribuição de bolsistas por curso e sexo"),
+        checkboxGroupInput("cursos_sexo", label = "", 
+                           choices = list( "Administração" = "Administração",
+                                           "Direito" = "Direito",
+                                           "Ciência Da Computação" = "Ciência Da Computação",
+                                           "Pedagogia" = "Pedagogia",
+                                           "Medicina" = "Medicina",
+                                           "Engenharia Civil" = "Engenharia Civil",
+                                           "Enfermagem" = "Enfermagem",
+                                           "Ciências Contábeis" = "Ciências Contábeis",
+                                           "Educação Física" = "Educação Física",
+                                           "Psicologia" = "Psicologia",
+                                           "Recursos Humanos" = "Recursos Humanos"
+                           ),
+                           selected = c("Ciência Da Computação"),
+                           inline = TRUE),
+        br(),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plot_curso_sexo")
           )
         )
       ),
