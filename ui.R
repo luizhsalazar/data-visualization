@@ -268,6 +268,10 @@ ui <- dashboardPage(
         fluidRow(
             box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeDeBolsa")
           )
+        ),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeBolsaPizza")
+          )
         )
       ),
       
@@ -279,7 +283,11 @@ ui <- dashboardPage(
         br(),
         fluidRow(
           box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotTipoDeBolsa"))
+          ),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotModalidadeTipoPizza")
           )
+        )
       ),
       
       tabItem(tabName = "graficoFaixaEtaria",
