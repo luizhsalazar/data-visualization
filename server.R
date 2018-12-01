@@ -69,6 +69,10 @@ server <- function(input, output) {
   plotCursos <- source("plots/plot_cursos.R")
   output$plotRegioes <- renderPlot(plotRegioes)
   output$plotSexo <- renderPlot(plotSexo)
+  
+  
+  
+  
   output$plotCursos <- renderPlot(plotCursos)
 
   ### DEFICIÊNCIA ###

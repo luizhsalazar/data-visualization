@@ -181,7 +181,6 @@ ui <- dashboardPage(
                                            "Psicologia" = "Psicologia",
                                            "Recursos Humanos" = "Recursos Humanos"
                                            ),
-                           c("Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos"),
                            selected = c("Ciência Da Computação"),
                            inline = TRUE),
         br(),
