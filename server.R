@@ -189,7 +189,7 @@ server <- function(input, output) {
       scale_y_continuous(limits = c(0, 30000)) + 
       theme_gray(base_size = 16) +
       my_theme()
-    return(plot_curso_sexo)
+    return(plot_por_curso_sexo)
   })
 
 }
