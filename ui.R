@@ -23,8 +23,8 @@ ui <- dashboardPage(
         
         menuItem("Região", icon = icon("map-marker"), startExpanted = TRUE,
                  menuSubItem("Bolsistas por estado", tabName = "graficoEstado"),
-                 menuSubItem("Bolsistas por região", tabName = "graficoRegiao"),
-                 menuSubItem("Renda familiar x bolsas fornecidas", tabName = "graficoRendaFamiliar")
+                 #menuSubItem("Bolsistas por região", tabName = "graficoRegiao"),
+                 menuSubItem("Bolsas X Nível de instrução", tabName = "graficoNivelInstrucao")
         ),
         
         menuItem("Diversidade", icon = icon("certificate"), startExpanted = TRUE,
@@ -63,9 +63,12 @@ ui <- dashboardPage(
       ),
       
       tabItem(
-        tabName = "graficoEstado" ,
+        tabName = "graficoEstado",
         h2(class = "text-bold", "Quantidade de bolsistas por Estado"),
-        selectInput('estado', 'Estado',  c("Santa Catarina" = "SC",
+        fluidRow(
+          valueBox(value = "São Paulo", subtitle = "é o estado com a maior quantidade de bolsistas do Brasil", icon = icon("area-chart"), color = "green", width = 12)
+        ),
+        selectInput('estado', 'Selecione o Estado',  c("Santa Catarina" = "SC",
                                            "Rio Grande do Sul" = "RS",
                                            "Paraná" = "PR",
                                            "São Paulo" = "SP",
@@ -111,9 +114,50 @@ ui <- dashboardPage(
       ),
       
       tabItem(
-        tabName = "graficoRendaFamiliar" ,
-        h2(class = "text-bold", "Análise da renda familiar comparando com a quantidade de bolsas fornecidas")
-        # TODO
+        tabName = "graficoNivelInstrucao" ,
+        h2(class = "text-bold", "Evolução do nível de instrução dos brasileiros nos últimos anos"),
+        p("De maneira geral, observa-se que a porcentagem da população com ensino superior completo tem crescido no mesmo ritmo que há aumento de bolsas no PROUNI."),
+        
+        selectInput('estado_instrucao', 'Selecione o Estado',  c("Santa Catarina" = "SC",
+                                           "Rio Grande do Sul" = "RS",
+                                           "Paraná" = "PR",
+                                           "São Paulo" = "SP",
+                                           "Rio de Janeiro" = "RJ",
+                                           "Minas Gerais" = "MG",
+                                           "Mato Grosso do Sul" = "MS",
+                                           "Mato Grosso" = "MT",
+                                           "Tocantins" = "TO",
+                                           "Bahia" = "BA",
+                                           "Sergipe" = "SE",
+                                           "Alagoas" = "AL",
+                                           "Pernambuco" = "PE",
+                                           "Maranhão" = "MA",
+                                           "Rio Grande do Norte" = "RN",
+                                           "Ceará" = "CE",
+                                           "Paraíba" = "PB",
+                                           "Pará" = "PA",
+                                           "Amapá" = "AP",
+                                           "Acre" = "AC",
+                                           "Rondônia" = "RO",
+                                           "Roraima" = "RR",
+                                           "Amazonas" = "AM",
+                                           "Distrito Federal" = "DF",
+                                           "Goiás" = "GO",
+                                           "Espírito Santo" = "ES"
+        ), multiple = TRUE, selected = 'SC'),
+        
+        fluidRow(
+          box(
+            width = 6, status = "primary", 
+            title = "Ensino superior Completo",
+            plotOutput("plot_nivel_instrucao_completo", width = "100%")
+          ),
+          box(
+            width = 6, status = "primary",
+            title = "Ensino superior Incompleto",
+            plotOutput("plot_nivel_instrucao_incompleto", width = "100%")
+          )
+        )
       ),
       
       tabItem(

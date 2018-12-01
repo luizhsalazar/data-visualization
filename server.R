@@ -14,7 +14,8 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
           complete = TRUE)
 }
 
-prouni <- read.csv("todososdados01.csv", sep=";", encoding = 'UTF-8')
+prouni <-          read.csv("todososdados01.csv", sep=";", encoding = 'UTF-8')
+nivel_instrucao <- read.csv("~/nivelinstrucao.csv", sep=",", encoding = 'UTF-8')
 
 server <- function(input, output) {
   
@@ -22,7 +23,7 @@ server <- function(input, output) {
     group_by_(.dots=c("ANO_CONCESSAO_BOLSA", "SIGLA_UF_BENEFICIARIO_BOLSA")) %>% 
     dplyr::summarize(total = n()) %>%
     as.data.frame()
-  
+
   bolsistas_estados_filter <- reactive({
     if (is.null(input$estado))
       bolsistas_estados <- filter(bolsistas_estados, SIGLA_UF_BENEFICIARIO_BOLSA == 'SC')
@@ -46,6 +47,45 @@ server <- function(input, output) {
     return(plot_bolsistas_estado)
   })
 
+  nivel_instrucao_filter <- reactive({
+    if (is.null(input$estado))
+      nivel_instrucao <- filter(nivel_instrucao, Estado == 'SC')
+    else
+      nivel_instrucao <- filter(nivel_instrucao, Estado %in% input$estado_instrucao)
+  })
+  
+  output$plot_nivel_instrucao_completo <- renderPlot({
+    data <- nivel_instrucao_filter()
+    plot_nivel_instrucao_completo <- ggplot() +
+      geom_line(data = data,
+                aes(x = Ano, y = Completo, color = Estado)) +
+      geom_point(data = data, aes(x = Ano, y = Completo), 
+                 pch = 1, alpha = 0.8, size = 3) +
+      labs(x = "Ano", y = "% População", col = "Estado") +
+      scale_x_continuous(limits = c(2012, 2018), breaks = seq(2012, 2018, 1)) +
+      scale_y_continuous(limits = c(0, 30)) + 
+      theme_gray(base_size = 16) +
+      my_theme()
+    
+    return(plot_nivel_instrucao_completo)
+  })
+  
+  output$plot_nivel_instrucao_incompleto <- renderPlot({
+    data <- nivel_instrucao_filter()
+    plot_nivel_instrucao_incompleto <- ggplot() +
+      geom_line(data = data,
+                aes(x = Ano, y = Incompleto, color = Estado)) +
+      geom_point(data = data, aes(x = Ano, y = Incompleto), 
+                 pch = 1, alpha = 0.8, size = 3) +
+      labs(x = "Ano", y = "% População", col = "Estado") +
+      scale_x_continuous(limits = c(2012, 2018), breaks = seq(2012, 2018, 1)) +
+      scale_y_continuous(limits = c(0, 30)) + 
+      theme_gray(base_size = 16) +
+      my_theme()
+    
+   return(plot_nivel_instrucao_incompleto)
+  })
+  
   saveRDS(prouni, "dados.rds")
 
   plotModalidadeDeBolsa <- source("plots/plot_modalidade_bolsa.R", encoding="utf-8")
