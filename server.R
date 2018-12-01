@@ -144,7 +144,7 @@ server <- function(input, output) {
 
   ### DEFICIÊNCIA ###
   plotDeficiencia <- source("plots/plot_bolsistas_deficiencia.R")
-  output$plotDeficienciaHistorico <- plotDeficienciaHistorico
+  output$plotDeficienciaHistoricoBarra <- plotDeficienciaHistoricoBarra
   output$plotDeficienciaBubble <- plotDeficienciaBubble
   output$plotDeficienciaDatatable <- plotDeficienciaDatatable
   
@@ -161,7 +161,7 @@ server <- function(input, output) {
   output$plotRaca <- renderPlot({
     filteredData <- bolsistas_raca_filter()
     plot_bolsistas_raca <- ggplot() +
-      geom_line(data = filteredData,
+      geom_line(data = filteredData, size = 1,
                 aes(x = ANO_CONCESSAO_BOLSA, y = total, color = RACA_BENEFICIARIO_BOLSA)) +
       geom_point(data = filteredData, aes(x = ANO_CONCESSAO_BOLSA, y = total), 
                 pch = 1, alpha = 0.8, size = 3) +

@@ -22,7 +22,7 @@ bolsistas_deficiencia_filter <- filter(bolsistas_deficiencia, BENEFICIARIO_DEFIC
 plotDeficienciaHistorico <- renderPlot({
   filteredData <- bolsistas_deficiencia_filter
   plot_bolsistas_deficiencia <- ggplot() +
-    geom_line(data = filteredData,
+    geom_line(data = filteredData, size = 1,
               aes(x = ANO_CONCESSAO_BOLSA, y = total, color = BENEFICIARIO_DEFICIENTE_FISICO)) +
     geom_point(data = filteredData, aes(x = ANO_CONCESSAO_BOLSA, y = total), 
               pch = 1, alpha = 0.8, size = 3) +
@@ -32,8 +32,21 @@ plotDeficienciaHistorico <- renderPlot({
     theme_gray(base_size = 16) +
   my_theme()
   return(plot_bolsistas_deficiencia)
+  
 })
 
+plotDeficienciaHistoricoBarra <- renderPlot({
+  filteredData <- bolsistas_deficiencia_filter
+  plot_bolsistas_deficiencia <- ggplot(filteredData, aes(x = ANO_CONCESSAO_BOLSA, y = total)) +
+    geom_bar(stat = "identity", width = 0.5, fill = "#006400") +
+    labs(x = "Ano",
+         y = "Número de bolsistas") +
+    scale_x_continuous(breaks = seq(2005, 2016, 1)) +
+    scale_y_continuous(limits=c(0, 2500), breaks = seq(0, 2500, 1000)) +
+    my_theme() +
+    theme(axis.text.x = element_text(vjust = 0.6))
+  return(plot_bolsistas_deficiencia)
+})
 
 bolsistas_deficiencia_instituicao <- prouni %>%
   group_by(NOME_IES_BOLSA) %>% 
@@ -45,11 +58,12 @@ plotDeficienciaBubble <- renderBubbles({
     arrange(desc(BOLSISTAS_DEFICIENTES), tolower(NOME_IES_BOLSA)) %>%
     head(8)
   bubbles(
+    textColor = "#000000",
     df$BOLSISTAS_DEFICIENTES,
     df$NOME_IES_BOLSA,
     key = df$NOME_IES_BOLSA,
     tooltip = df$BOLSISTAS_DEFICIENTES,
-    color = rev(brewer.pal(n = 8, name = "GnBu"))
+    color = rev(brewer.pal(n = 8, name = "Greens"))
   )
 })
 
