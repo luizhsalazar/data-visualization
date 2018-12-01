@@ -15,7 +15,7 @@ my_theme <- function (base_size = 14, base_family = "Arial") {
 }
 
 prouni <-          read.csv("todososdados01.csv", sep=";", encoding = 'UTF-8')
-nivel_instrucao <- read.csv("~/nivelinstrucao.csv", sep=",", encoding = 'UTF-8')
+nivel_instrucao <- read.csv("nivelinstrucao.csv", sep=",", encoding = 'UTF-8')
 
 server <- function(input, output) {
   
