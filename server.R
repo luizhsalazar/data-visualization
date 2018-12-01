@@ -171,7 +171,7 @@ server <- function(input, output) {
   
   bolsistas_por_curso_sexo <- prouni %>%
     filter(NOME_CURSO_BOLSA_NOVO %in% c("Administração", "Direito", "Ciência Da Computação", "Pedagogia", "Medicina", "Engenharia Civil", "Enfermagem", "Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos")) %>%
-    group_by_(.dots=c("SEXO_BENEFICIARIO_BOLSA", "ANO_CONCESSAO_BOLSA")) %>%
+    group_by_(.dots=c("SEXO_BENEFICIARIO_BOLSA", "ANO_CONCESSAO_BOLSA", "NOME_CURSO_BOLSA_NOVO")) %>%
     summarize(total = n()) %>%
     as.data.frame()
   
@@ -180,7 +180,7 @@ server <- function(input, output) {
   })
   
   output$plot_curso_sexo <- renderPlot({
-    filteredData <- bolsistas_curso_sexo_filter()
+    filtered_data <- bolsistas_curso_sexo_filter()
     plot_por_curso_sexo <- ggplot() +
       geom_line(data = filtered_data,
                 aes(x = ANO_CONCESSAO_BOLSA, y = total, color = SEXO_BENEFICIARIO_BOLSA)) +
