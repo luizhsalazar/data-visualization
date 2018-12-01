@@ -34,8 +34,9 @@ ui <- dashboardPage(
         ),
         
         menuItem("Características do ensino", icon = icon("book"), startExpanted = TRUE,
-                 menuSubItem("Modalidade de ensino", tabName = "graficoModalidadeEnsino"),
-                 menuSubItem("Tipos de bolsas", tabName = "graficoTipoBolsas")
+                 menuSubItem("Cursos", tabName = "graficoCursos"),
+                 menuSubItem("Modalidades de ensino", tabName = "graficoModalidadeEnsino"),
+                 menuSubItem("Tipos de bolsa", tabName = "graficoTipoBolsas")
         ),
         
         menuItem("Faixa etária", icon = icon("user"), startExpanted = TRUE,
@@ -102,11 +103,11 @@ ui <- dashboardPage(
         tabName = "graficoRegiao" ,
         h2(class = "text-bold", "Quantidade de bolsistas por Região"),
         br(),
-        p("Texto a fazer")
-        ##fluidRow(
-        ##  box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotRegioes")
-        ##  )
-        ##)
+        p("Texto a fazer"),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotRegioes")
+          )
+        )
       ),
       
       tabItem(
@@ -117,8 +118,11 @@ ui <- dashboardPage(
       
       tabItem(
         tabName = "graficoSexo" ,
-        h2(class = "text-bold", "Análise de proporção de bolsistas por sexo nos cursos")
-        # TODO
+        h2(class = "text-bold", "Análise de proporção de bolsistas por sexo"),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotSexo")
+          )
+        )
       ),
       
       tabItem(
@@ -162,6 +166,33 @@ ui <- dashboardPage(
       ),
       
       tabItem(
+        tabName = "graficoCursos" ,
+        h2(class = "text-bold", "Evolução das bolsas oferecidas por curso"),
+        checkboxGroupInput("cursos", label = "", 
+                           choices = list( "Administração" = "Administração",
+                                           "Direito" = "Direito",
+                                           "Ciência Da Computação" = "Ciência Da Computação",
+                                           "Pedagogia" = "Pedagogia",
+                                           "Medicina" = "Medicina",
+                                           "Engenharia Civil" = "Engenharia Civil",
+                                           "Enfermagem" = "Enfermagem",
+                                           "Ciências Contábeis" = "Ciências Contábeis",
+                                           "Educação Física" = "Educação Física",
+                                           "Psicologia" = "Psicologia",
+                                           "Recursos Humanos" = "Recursos Humanos"
+                                           ),
+                           c("Ciências Contábeis", "Educação Física", "Psicologia", "Recursos Humanos"),
+                           selected = c("Ciência Da Computação"),
+                           inline = TRUE),
+        br(),
+        p("Texto a fazer"),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotCursos")
+          )
+        )
+      ),
+      
+      tabItem(
         tabName = "graficoModalidadeEnsino" ,
         h2(class = "text-bold", "Evolução das bolsas oferecidas por modalidade de ensino"),
         br(),
@@ -176,8 +207,10 @@ ui <- dashboardPage(
         tabName = "graficoTipoBolsas" ,
         h2(class = "text-bold", "Análise da proporção de bolsas por tipo de bolsas (Parcial e integral)"),
         br(),
-        p("Texto a fazer")
-        # TODO
+        p("Texto a fazer"),
+        fluidRow(
+          box(title = "", width = 12, status = "primary", solidHeader = FALSE, collapsible = FALSE, plotOutput("plotTipoDeBolsa"))
+          )
       ),
       
       tabItem(tabName = "graficoFaixaEtaria",

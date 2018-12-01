@@ -48,8 +48,10 @@ server <- function(input, output) {
 
   saveRDS(prouni, "dados.rds")
 
-  plotModalidadeDeBolsa <- source("plots/plot_modalidade_e_tipo_bolsa.R", encoding="utf-8")
+  plotModalidadeDeBolsa <- source("plots/plot_modalidade_bolsa.R", encoding="utf-8")
   output$plotModalidadeDeBolsa <- renderPlot(plotModalidadeDeBolsa)
+  plotTipoDeBolsa <- source("plots/plot_tipo_bolsa.R", encoding="utf-8")
+  output$plotTipoDeBolsa <- renderPlot(plotTipoDeBolsa)
   
   ## FAIXA ETARIA
   plotFaixaEtaria1 <- source("plots/faixa_etaria/plot_faixa_etaria_1.R", encoding="utf-8")
@@ -62,11 +64,12 @@ server <- function(input, output) {
   output$plotFaixaEtaria4 <- renderPlot(plotFaixaEtaria4)
  
   
-  
-  ##plotRegioes <- source("plots/plot_regioes.R")
-  ##plotSexo <- source("plots/plot_sexo.R")
-  ##output$plotRegioes <- renderPlot(plotRegioes)
-  ##output$plotSexo <- renderPlot(plotSexo)
+  plotRegioes <- source("plots/plot_regioes.R")
+  plotSexo <- source("plots/plot_sexo.R")
+  plotCursos <- source("plots/plot_cursos.R")
+  output$plotRegioes <- renderPlot(plotRegioes)
+  output$plotSexo <- renderPlot(plotSexo)
+  output$plotCursos <- renderPlot(plotCursos)
 
   ### DEFICIÊNCIA ###
   plotDeficiencia <- source("plots/plot_bolsistas_deficiencia.R")

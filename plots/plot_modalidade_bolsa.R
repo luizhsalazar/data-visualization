@@ -1,11 +1,10 @@
 ## importando pacotes
 library(ggplot2)
+library(plyr)
 library(dplyr)
 library(lubridate)
 
 Sys.setlocale("LC_ALL", "pt_BR.UTF-8")
-
-detach("package:plyr", unload=TRUE) 
 
 ##tema dor ggplot2
 seta <- grid::arrow (length = grid::unit(0.2, "cm"), type = "open")
@@ -26,37 +25,15 @@ my_theme <- function(base_size = 14, base_family = "Arial") {
 
 todososdados01 <- readRDS("dados.rds")
 
-tab_tipo_bolsa <- todososdados01 %>%
-  group_by_(.dots=c("ANO_CONCESSAO_BOLSA","TIPO_BOLSA")) %>% 
-  summarize(total = n()) %>%
-  as.data.frame()
-
 tab_modalidade_bolsa <- todososdados01 %>%
   group_by_(.dots=c("ANO_CONCESSAO_BOLSA","MODALIDADE_ENSINO_BOLSA")) %>% 
   summarize(total = n()) %>%
   as.data.frame()
 
-#View(tab_tipo_bolsa)
-
-plot_tipo_bolsa <- ggplot() +
-  geom_line(data = tab_tipo_bolsa, aes(x= ANO_CONCESSAO_BOLSA,
-                              y = total, 
-                              color = TIPO_BOLSA)) +
-  geom_point(data = tab_tipo_bolsa, aes(x= ANO_CONCESSAO_BOLSA, y = total),
-            pch = 21, fill = "white", color = "black",
-             alpha = 0.8, size = 4)+
-  labs (x = "Ano", y="Número Bolsistas", col="Tipo de Bolsa") +
-  scale_x_continuous(limits = c(2005, 2017),
-                     breaks = seq(2005, 2017, 1)) +
-  scale_y_continuous(limits = c (0,200000))+
-  my_theme()
-#theme_gray(base_size = 16) 
-plot_tipo_bolsa
-
 plot_modalidade_bolsa <- ggplot() +
   geom_line(data = tab_modalidade_bolsa, aes(x= ANO_CONCESSAO_BOLSA,
-                                       y = total, 
-                                       color = MODALIDADE_ENSINO_BOLSA)) +
+                                             y = total, 
+                                             color = MODALIDADE_ENSINO_BOLSA)) +
   geom_point(data = tab_modalidade_bolsa, aes(x= ANO_CONCESSAO_BOLSA, y = total),
              pch = 21, fill = "white", color = "black",
              alpha = 0.8, size = 4)+
@@ -66,9 +43,4 @@ plot_modalidade_bolsa <- ggplot() +
   scale_y_continuous(limits = c (0,210000))+
   my_theme()
 #theme_gray(base_size = 16) 
-##plot_modalidade_bolsa
-
-
-
-
-
+plot_modalidade_bolsa

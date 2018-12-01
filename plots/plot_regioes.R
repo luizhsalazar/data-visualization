@@ -5,12 +5,11 @@ library(ggExtra)
 library(ggthemes)
 library(ggplotify)
 library(treemapify)
+library(plyr)
 library(dplyr)
 library(scales)
-library(plyr)
 library(zoo)
 library(lubridate)
-detach("package:plyr", unload=TRUE) 
 
 Sys.setlocale("LC_ALL", 'pt_BR.UTF-8')
 
@@ -31,7 +30,7 @@ my_theme <- function(base_size = 14, base_family = "Arial") {
           complete = TRUE)
 } 
 
-prouni <- read.csv("./../todososdados01.csv", sep=";")
+prouni <- readRDS("dados.rds")
 prouni <- prouni[prouni$SIGLA_UF_BENEFICIARIO_BOLSA != '', ]
 
 bolsistas_por_regiao <- prouni %>%
@@ -52,3 +51,5 @@ plot_regioes_por_ano <- ggplot() +
   my_theme()
 
 plot_regioes_por_ano
+
+
